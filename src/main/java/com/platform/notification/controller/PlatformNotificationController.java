@@ -1,10 +1,7 @@
 package com.platform.notification.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.platform.notification.request.NotificationRequest;
 import com.platform.notification.response.GenericResponse;
@@ -22,7 +19,17 @@ public class PlatformNotificationController {
 	
 	@Autowired
 	private PlatformNotificationService platformNotificationService;
-	
+	@Operation(summary = "Welcome message")
+	@ApiResponses(value = {
+	  @ApiResponse(responseCode = "200", description = "successfull",
+	    content = { @Content(mediaType = "application/json",
+	      schema = @Schema(implementation = String .class)) }),
+	  @ApiResponse(responseCode = "404", description = "sendPlatformEmail api not found",
+	    content = @Content) })
+	@GetMapping("welcome")
+	public String welcome() {
+		return "Welcome to the platform notification service..!";
+	}
 	
 	@Operation(summary = "Sending veiry email with html content")
 	@ApiResponses(value = { 
