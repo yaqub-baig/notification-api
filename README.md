@@ -1,1 +1,1 @@
-PlatformNotificationService
+# notification-api
